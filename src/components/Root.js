@@ -5,11 +5,8 @@ import App from './App';
 
 export default class Root extends Component {
   render() {
-    const { store} = this.props;
     return (
-      <Provider store={store}>
-          <App />
-      </Provider>
+      <App />
     );
   }
 }
