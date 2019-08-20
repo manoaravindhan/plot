@@ -5,6 +5,7 @@ import Fab from "@material-ui/core/Fab";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Edit from "@material-ui/icons/BorderColor";
 import Legend from "@material-ui/icons/Category";
+import Chart from "@material-ui/icons/BarChart";
 import Send from "@material-ui/icons/Send";
 import CloudUpload from "@material-ui/icons/CloudUpload";
 import FileCopy from "@material-ui/icons/FileCopy";
@@ -12,6 +13,8 @@ import Portal from "@material-ui/core/Portal";
 import {getElementById} from '../utils/dom';
 import UploadModal from "./UploadModal";
 import ExportModal from "./ExportModal";
+import ChartModal from "./ChartModal";
+import LoadingModal from "./LoadingModal";
 import Legends from './Legends';
 import { green } from '@material-ui/core/colors';
 
@@ -82,6 +85,9 @@ function MapControls({ classes, toggleLegends, initialView, showResults, edit })
         <Fab aria-label="export" className={classes.fab} onClick={()=>setOpenModal('export')}>
           <FileCopy />
         </Fab>  
+        {!initialView &&<Fab aria-label="chart" className={classes.fab} onClick={()=>setOpenModal('charts')}>
+          <Chart />
+        </Fab>}
         {!initialView && <Fab aria-label="legends" className={classes.fab} onClick={()=>setOpenModal('legends')}>
           <Legend />
         </Fab>}
@@ -104,7 +110,9 @@ function MapControls({ classes, toggleLegends, initialView, showResults, edit })
       <Portal container={getElementById('modal')}>
       {openModal === 'export' && <ExportModal open={openModal === 'export'} close={()=>setOpenModal('')} title='edit'/>}
       {openModal === 'upload' && <UploadModal open={openModal === 'upload'} close={()=>setOpenModal('')}/>}
-        {openModal === 'legends' && <Legends close={()=>setOpenModal('')} toggle={toggleLegends}/>}
+      {openModal === 'legends' && <Legends close={()=>setOpenModal('')} toggle={toggleLegends}/>}
+      {openModal === 'charts' && <ChartModal close={()=>setOpenModal('')} open={openModal === 'charts'} />}
+      {loading && <LoadingModal close={()=>setOpenModal('')} open={loading} />}
       </Portal>
     </>
   );

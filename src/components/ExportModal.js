@@ -48,6 +48,15 @@ const styles = theme => ({
 
 const ExportModal = ({ classes, open,close }) => {
   const [format, setFormat] = useState("pdf");
+  const exportFn = ()=>{
+    let lctn = '';
+    switch(format){
+      case "pdf": lctn = '../static/export.pdf'; break;
+      case "xlsx": lctn = '../static/excel.xlsx'; break;
+      case "jpg": lctn = '../static/image.JPG'; break;
+    }
+    window.open(lctn);
+  }
   return (
     <Modal
       aria-labelledby="simple-modal-title"
@@ -85,7 +94,7 @@ const ExportModal = ({ classes, open,close }) => {
         <Button variant="contained" className={classes.button} onClick={close}>
           Cancel
         </Button>
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button variant="contained" color="primary" className={classes.button} onClick={exportFn}>
           Export
         </Button>
         </div>

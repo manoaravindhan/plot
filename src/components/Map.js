@@ -36,9 +36,17 @@ const colors = {
   11: 'deeporange',
 }
 
-const styles =(id)=> new Style({
+const styles =(id)=> id ? new Style({
     stroke: new Stroke({
       color: colors[id],
+      width: 1
+    }),
+    fill: new Fill({
+      color: colors[id]
+    })
+  }) : new Style({
+    stroke: new Stroke({
+      color: 'blue',
       width: 1
     }),
     fill: new Fill({
